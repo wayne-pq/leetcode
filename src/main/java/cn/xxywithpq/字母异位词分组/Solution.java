@@ -8,15 +8,8 @@ class Solution {
 		for (String str : strs) {
 			char[] tempArr = str.toCharArray();
 			Arrays.sort(tempArr);
-			String tempStr = new String(tempArr);
-			if (map.containsKey(tempStr)) {
-				List<String> list = map.get(tempStr);
-				list.add(str);
-			} else {
-				List<String> list = new ArrayList<>();
-				list.add(str);
-				map.put(tempStr, list);
-			}
+			String key = new String(tempArr);
+			map.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
 		}
 
 		return new ArrayList<>(map.values());
@@ -32,8 +25,8 @@ class Solution {
 				count[c - 'a']++;
 			}
 
-			String key = new String(count,0,26);
-			map.computeIfAbsent(key,k->new ArrayList<>()).add(str);
+			String key = new String(count, 0, 26);
+			map.computeIfAbsent(key, k -> new ArrayList<>()).add(str);
 		}
 
 		return new ArrayList<>(map.values());
