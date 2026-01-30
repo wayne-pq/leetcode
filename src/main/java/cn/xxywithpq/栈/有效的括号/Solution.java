@@ -14,19 +14,16 @@ class Solution {
 
 		Stack<Character> stack = new Stack<>();
 
-		for (int i = 0; i < sArr.length; i++) {
-			if (map.containsKey(sArr[i])) {
-				stack.push(sArr[i]);
+		for (char c : sArr) {
+			if (map.containsKey(c)) {
+				stack.push(c);
 			} else {
-				if (stack.isEmpty() || sArr[i] != map.get(stack.pop())) {
+				if (stack.isEmpty() || c != map.get(stack.pop())) {
 					return false;
 				}
 			}
 		}
 
-		if (!stack.isEmpty()) {
-			return false;
-		}
-		return true;
+		return stack.isEmpty();
 	}
 }
